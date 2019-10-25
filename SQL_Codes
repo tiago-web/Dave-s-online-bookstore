@@ -176,10 +176,13 @@ where wish_book_name = 'Sword Arts'
 
 --------Requirement 4
 
-select b.book_name, b.book_type, w.writer_name, (b.book_price * o.order_quantity) as total_price, c.customer_name, o.shipping_number, o.arrival
+create view [requirement4] as
+select b.book_name, b.book_type, w.writer_name, (b.book_price * o.order_quantity) as total_price, c.customer_name, o.order_id, o.arrival
 from books b, writers w, orders o, customers c, trucks t
 where b.writer_id = w.writer_id and b.book_id = o.book_id and c.customer_id = o.customer_id and t.truck_id = o.truck_id
-and c.customer_id = 'C7'
+
+
+select * from requirement4 where order_id = 'O3'
 
 --------Requirement 5
 
