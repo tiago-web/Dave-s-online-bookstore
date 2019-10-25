@@ -1,0 +1,218 @@
+create database Dave_Online_Bookstore;
+
+create table writers(
+	writer_id varchar(20) not null primary key,
+	writer_name varchar(20) not null,
+	writer_email varchar(30) not null,
+	writer_commission money not null
+)
+
+insert into writers(writer_id, writer_name, writer_email, writer_commission) values ('W1', 'William', 'William@gmail.com', 0.2);
+insert into writers values ('W2', 'George R.', 'GeorgeR.@gmail.com', 0.1);
+insert into writers values ('W3', 'Tiago S.', 'Tiago@gmail.com', 0.3);
+insert into writers values ('W4', 'Stephen King', 'Stephen@gmail.com', 0.25);
+insert into writers values ('W5', 'J.K. Rowling', 'Rowling@gmail.com', 0.15);
+insert into writers values ('W6', 'J.R.R. Tolkien', 'Tolkien@gmail.com', 0.2);
+insert into writers values ('W7', 'George Lucas', 'GeorgeLucas@gmail.com', 0.1);
+
+
+
+create table books(
+	book_id varchar(20) not null primary key,
+	book_name varchar(50) not null,
+	book_type varchar(20) not null,
+	writer_id varchar(20) not null,
+	book_price money not null,
+	book_stock varchar(20) not null
+)
+
+insert into books(book_id, book_name, book_type, writer_id, book_price, book_stock) values ('B1', 'Snow White', 'Romance', 'W1', '$20' , 500);
+insert into books values ('B2', 'Junkie', 'Psychology', 'W1' , '$30' , 300);
+insert into books values ('B3', 'Romeo and Julliet', 'Romance', 'W1' , '$25' , 400);
+insert into books values ('B4', 'Song of Ice and Fire', 'Fantasy', 'W2' , '$26' , 200);
+insert into books values ('B5', 'Total War', 'Action', 'W2' , '$15.7' , 130);
+insert into books values ('B6', 'Data Design', 'Learning', 'W3' , '$100' , 300);
+insert into books values ('B7', 'It', 'Horror', 'W4' , '$18' , 200);
+insert into books values ('B8', 'Harry Potter Collection', 'Fantasy and Drama', 'W5' , '$20.5' , 300);
+insert into books values ('B9', 'The lord of Rings', 'Fantasy', 'W6' , '$21' , 150);
+insert into books values ('B10', 'Star Wars', 'Science Fiction', 'W7' , '$20' , 300);
+
+update books
+set book_type = 'Fantasy'
+where book_type = 'Fantasy and Drama'
+
+create table bookstore(
+	store_id varchar(20) not null primary key,
+	store_name varchar(30) not null,
+	store_address varchar(20) not null
+)
+
+insert into bookstore(store_id, store_name, store_address) values ('S1', 'Dave book store', 'Q03 EY3');
+
+
+create table trucks(
+	truck_id varchar(20) not null primary key,
+	driver_name varchar(20) not null
+)
+
+insert into trucks(truck_id, driver_name) values ('T1', 'Dave');
+insert into trucks values ('T2', 'Liu');
+
+create table workers(
+	worker_id varchar(20) not null primary key,
+	worker_name varchar(20) not null,
+	worker_salary money not null,
+	worker_time varchar(20) not null,
+	worker_type varchar(30) not null
+)
+
+insert into workers(worker_id, worker_name, worker_salary, worker_time, worker_type) values ('WK1', 'Jack', '$1200.00', 'Mon-Sat', 'Manager');
+insert into workers values ('WK2', 'Oliver', '$960.00', 'Mon-Sat', 'Database Administrator');
+insert into workers values ('WK3', 'James', '$720.00', 'Mon-Sat', 'Clerk');
+insert into workers values ('WK4', 'William', '$960.00', 'Mon-Sat', 'Programmer');
+insert into workers values ('WK5', 'George', '$820.00', 'Mon-Sun', 'Telephone Operator');
+insert into workers values ('WK6', 'Dave', '$720.00', 'Mon-Sat', 'Driver');
+insert into workers values ('WK7', 'Liu', '$720.00', 'Mon-Sat', 'Driver');
+
+
+create table customers(
+	customer_id varchar(20) not null primary key,
+	customer_name varchar(20) not null,
+	customer_address varchar(20) not null,
+	customer_phone varchar(20) not null
+)
+
+insert into customers(customer_id, customer_name, customer_address, customer_phone) values ('C1', 'Cestar School', 'L6G 0W5', '647_XXXXX01');
+insert into customers values ('C2', 'Bill Company', 'L0G 0W1', '647_XXXXX02');
+insert into customers values ('C3', 'James', 'A37 4L1', '647_XXXXX03');
+insert into customers values ('C4', 'David', 'L1F 4P5', '647_XXXXX04');
+insert into customers values ('C5', 'Josh', 'F1R 0R1', '647_XXXXX05');
+insert into customers values ('C6', 'Thomas', 'G1H 0R1', '647_XXXXX06');
+insert into customers values ('C7', 'Fake', 'K1L 9K1', '647_XXXXX07');
+insert into customers values ('C8', 'Lambton College', 'P1L 4W1', '647_XXXXX08');
+insert into customers values ('C9', 'Jane', 'M1F M47', '647_XXXXX09');
+insert into customers values ('C10', 'Tim', 'L01 PG3', '647_XXXXX10');
+
+
+create table orders(
+	order_id varchar(20) not null primary key,
+	customer_id varchar(20) not null,
+	truck_id varchar(20) not null,
+	book_id varchar(20) not null,
+	store_id varchar(20) not null,
+	order_quantity varchar(20) not null,
+	arrival varchar(10) not null
+)
+
+insert into orders(order_id, customer_id, truck_id, book_id, store_id, order_quantity, arrival) values ('O1', 'C1' ,'T1' , 'B3', 'S1' , 2 , 'YES');
+insert into orders values ('O2', 'C2' ,'T1' , 'B1', 'S1' , 2, 'YES');
+insert into orders values ('O3', 'C3' ,'T2' , 'B3', 'S1' , 1, 'NO');
+insert into orders values ('O4', 'C4' ,'T2' , 'B4', 'S1' , 3, 'NO');
+insert into orders values ('O5', 'C5' ,'T1' , 'B6', 'S1' , 1, 'YES');
+insert into orders values ('O6', 'C6' ,'T1' , 'B2', 'S1' , 1, 'YES');
+insert into orders values ('O7', 'C7' ,'T2' , 'B4', 'S1' , 2, 'NO');
+insert into orders values ('O8', 'C7' ,'T2' , 'B6', 'S1' , 3, 'NO');
+insert into orders values ('O9', 'C7' ,'T1' , 'B3', 'S1' , 1, 'YES');
+insert into orders values ('O10', 'C8' ,'T2' , 'B6', 'S1' , 50, 'NO');
+insert into orders values ('O11', 'C8' ,'T1' , 'B3', 'S1' , 35, 'YES');
+insert into orders values ('O12', 'C9' ,'T1' , 'B4', 'S1' , 50, 'YES');
+insert into orders values ('O13', 'C9' ,'T2' , 'B7', 'S1' , 40, 'NO');
+insert into orders values ('O14', 'C9' ,'T2' , 'B10', 'S1' , 35, 'NO');
+insert into orders values ('O15', 'C10' ,'T1' , 'B1', 'S1' , 35, 'YES');
+insert into orders values ('O16', 'C10' ,'T2' , 'B2', 'S1' , 35, 'NO');
+
+create table wish_list(
+	wish_list_id varchar(20) not null primary key,
+	wish_book_name varchar(50) not null,
+	wish_book_type varchar(20) not null,
+	customer_id varchar(20) not null
+)
+
+insert into wish_list(wish_list_id, wish_book_name, wish_book_type, customer_id) values ('L1', 'Sword Arts', 'Science Fiction', 'C1');
+insert into wish_list values ('L2', 'Wolf Hall', 'Historical', 'C1');
+insert into wish_list values ('L3', 'Sword Arts', 'Science Fiction', 'C3');
+insert into wish_list values ('L4', 'The Book Thief', 'Historical', 'C4');
+insert into wish_list values ('L5', 'Outlander', 'Historical', 'C5');
+insert into wish_list values ('L6', 'Before We Were Yours', 'Historical', 'C6');
+
+--------book store system
+
+--------Requirement 1
+create view [requirement1] as
+select w.writer_name, b.book_name, b.book_type, b.book_stock, b.book_price
+from writers w, books b
+where b.writer_id = w.writer_id
+
+select * from requirement1
+
+--------Requirement 2
+
+create view [requirement2] as
+select w.writer_name, b.book_name, b.book_type, b.book_price
+from writers w, books b
+where b.writer_id = w.writer_id 
+
+select * from requirement2
+where book_name = 'Romeo and Julliet'
+
+select * from requirement2
+where book_type = 'Fantasy'
+
+select * from requirement2
+where writer_name = 'William'
+
+--------Requirement 3
+
+create view [requirement3] as
+select wish_list_id, wish_book_name, wish_book_type, customer_id
+from wish_list
+
+-------- For checking how many requests there are for each type of book
+
+
+select * from requirement3
+where wish_book_name = 'Sword Arts'
+
+
+--------Requirement 4
+
+select b.book_name, b.book_type, w.writer_name, (b.book_price * o.order_quantity) as total_price, c.customer_name, o.shipping_number, o.arrival
+from books b, writers w, orders o, customers c, trucks t
+where b.writer_id = w.writer_id and b.book_id = o.book_id and c.customer_id = o.customer_id and t.truck_id = o.truck_id
+and c.customer_id = 'C7'
+
+--------Requirement 5
+
+--------Total Money per week
+
+select sum(o.order_quantity * b.book_price) as total_week
+from orders o , books b
+where b.book_id = o.book_id
+
+
+--------Requirement 6
+
+--------Total Workers' salary per week
+
+select sum(w.worker_salary) as workers_salary
+from workers w
+
+
+---------Writers commission
+
+select sum( w.writer_commission * book_price * o.order_quantity) as writer_commission
+from writers w, books b, orders o
+where w.writer_id = b.writer_id and b.book_id = o.book_id
+
+---------Profit
+
+begin 
+declare @total_salary_per_week money = 6100.00
+declare @total_money_per_a_week money = 11045.00
+declare @total_writer_profit money = 2572.00
+print ('The total Profit is: ')
+print @total_money_per_a_week - (@total_salary_per_week + @total_writer_profit)
+print ('dollars')
+end;
+
+go
